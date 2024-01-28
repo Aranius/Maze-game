@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Maps\mapa0.map" />
+    <None Remove="Maps\mapa0.state" />
+    <None Remove="Maps\mapa1.map" />
+    <None Remove="Maps\mapa10.map" />
+    <None Remove="Maps\mapa2.map" />
+    <None Remove="Maps\mapa3.map" />
+    <None Remove="Maps\mapa4.map" />
+    <None Remove="Maps\mapa5.map" />
+    <None Remove="Maps\mapa6.map" />
+    <None Remove="Maps\mapa7.map" />
+    <None Remove="Maps\mapa8.map" />
+    <None Remove="Maps\mapa9.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Maps\mapa0.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa0.state">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa1.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa10.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa2.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa3.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa4.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa5.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa6.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa7.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa8.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\mapa9.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MapModel\MapModel.csproj" />
+  </ItemGroup>
+
+</Project>
