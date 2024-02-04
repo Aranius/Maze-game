@@ -95,21 +95,23 @@
             // 
             // OpenMapDialog
             // 
-            OpenMapDialog.DefaultExt="*.MAP";
+            OpenMapDialog.DefaultExt="MAP";
+            OpenMapDialog.Filter="Maze Map|*.map";
             // 
             // SaveMapDialog
             // 
-            SaveMapDialog.DefaultExt="*.MAP";
+            SaveMapDialog.DefaultExt="MAP";
+            SaveMapDialog.Filter="Maze Map|*.map";
             // 
             // OpenOverlayDialog
             // 
-            OpenOverlayDialog.DefaultExt="*.state";
+            OpenOverlayDialog.DefaultExt="state";
             OpenOverlayDialog.FileName="openFileDialog1";
             OpenOverlayDialog.Filter="Overlay|*.state";
             // 
             // saveOverlayDialog
             // 
-            saveOverlayDialog.DefaultExt="*.state";
+            saveOverlayDialog.DefaultExt="state";
             saveOverlayDialog.Filter="Overlay|*.state";
             // 
             // descriptionBox
