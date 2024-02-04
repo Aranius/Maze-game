@@ -121,14 +121,14 @@
             descriptionBox.Location = new Point(590, 24);
             descriptionBox.Multiline = true;
             descriptionBox.Name = "descriptionBox";
-            descriptionBox.Size = new Size(210, 426);
+            descriptionBox.Size = new Size(210, 871);
             descriptionBox.TabIndex = 1;
             // 
             // CreateObjectContextMenu
             // 
             CreateObjectContextMenu.Items.AddRange(new ToolStripItem[] { toolStripCreateDoor, toolStripCreateTrap, toolStripCreateItem, toolStripCreateFinish });
             CreateObjectContextMenu.Name = "CreateObjectContextMenu";
-            CreateObjectContextMenu.Size = new Size(181, 114);
+            CreateObjectContextMenu.Size = new Size(143, 92);
             // 
             // toolStripCreateDoor
             // 
@@ -147,14 +147,14 @@
             // teleportingToolStripMenuItem
             // 
             teleportingToolStripMenuItem.Name = "teleportingToolStripMenuItem";
-            teleportingToolStripMenuItem.Size = new Size(180, 22);
+            teleportingToolStripMenuItem.Size = new Size(116, 22);
             teleportingToolStripMenuItem.Text = "Teleport";
             teleportingToolStripMenuItem.Click += teleportingToolStripMenuItem_Click;
             // 
             // toolStripCreateItem
             // 
             toolStripCreateItem.Name = "toolStripCreateItem";
-            toolStripCreateItem.Size = new Size(180, 22);
+            toolStripCreateItem.Size = new Size(142, 22);
             toolStripCreateItem.Text = "Create Item";
             toolStripCreateItem.Click += toolStripCreateItem_Click;
             // 
@@ -163,12 +163,13 @@
             toolStripCreateFinish.Name = "toolStripCreateFinish";
             toolStripCreateFinish.Size = new Size(142, 22);
             toolStripCreateFinish.Text = "Create Finish";
+            toolStripCreateFinish.Click += toolStripCreateFinish_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 895);
             Controls.Add(descriptionBox);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;

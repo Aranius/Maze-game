@@ -247,5 +247,33 @@ namespace MapEditor
                 RefreshButtonColors();
             }
         }
+
+        private void toolStripCreateFinish_Click(object sender, EventArgs e)
+        {
+            var finisheditForm = new FinishEditForm();
+            finisheditForm.Treasures = mapObjects
+                .Where(x => x is Item item && item.ItemType == ItemTypeEnum.Treasure)
+                .Cast<Item>()
+                .ToList();
+            var result = finisheditForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                var button = CreateObjectContextMenu.SourceControl;
+                var (x, y) = (ValueTuple<int, int>)button.Tag;
+                var finish = new Finish();
+                finish.X = x;
+                finish.Y = y;
+
+                var selectedItems = finisheditForm.Treasures
+                    .Where(x => finisheditForm.SelectedTreasures.Contains(x.Name)).ToList();
+
+                finish.FullfillmentConditionList = selectedItems;
+
+                mapObjects.Add(finish);
+
+                RefreshButtonColors();
+            }
+        }
     }
-}
+}                                     
