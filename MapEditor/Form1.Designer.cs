@@ -43,9 +43,9 @@
             CreateObjectContextMenu = new ContextMenuStrip(components);
             toolStripCreateDoor = new ToolStripMenuItem();
             toolStripCreateTrap = new ToolStripMenuItem();
+            teleportingToolStripMenuItem = new ToolStripMenuItem();
             toolStripCreateItem = new ToolStripMenuItem();
             toolStripCreateFinish = new ToolStripMenuItem();
-            teleportingToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             CreateObjectContextMenu.SuspendLayout();
             SuspendLayout();
@@ -69,28 +69,28 @@
             // otvorMapuToolStripMenuItem
             // 
             otvorMapuToolStripMenuItem.Name = "otvorMapuToolStripMenuItem";
-            otvorMapuToolStripMenuItem.Size = new Size(180, 22);
+            otvorMapuToolStripMenuItem.Size = new Size(145, 22);
             otvorMapuToolStripMenuItem.Text = "Otvor mapu";
             otvorMapuToolStripMenuItem.Click += otvorMapuToolStripMenuItem_Click;
             // 
             // otvorOverlayToolStripMenuItem
             // 
             otvorOverlayToolStripMenuItem.Name = "otvorOverlayToolStripMenuItem";
-            otvorOverlayToolStripMenuItem.Size = new Size(180, 22);
+            otvorOverlayToolStripMenuItem.Size = new Size(145, 22);
             otvorOverlayToolStripMenuItem.Text = "Otvor overlay";
             otvorOverlayToolStripMenuItem.Click += otvorOverlayToolStripMenuItem_Click;
             // 
             // ulozMapuToolStripMenuItem
             // 
             ulozMapuToolStripMenuItem.Name = "ulozMapuToolStripMenuItem";
-            ulozMapuToolStripMenuItem.Size = new Size(180, 22);
+            ulozMapuToolStripMenuItem.Size = new Size(145, 22);
             ulozMapuToolStripMenuItem.Text = "Uloz mapu";
             ulozMapuToolStripMenuItem.Click += ulozMapuToolStripMenuItem_Click;
             // 
             // ulozOverlayToolStripMenuItem
             // 
             ulozOverlayToolStripMenuItem.Name = "ulozOverlayToolStripMenuItem";
-            ulozOverlayToolStripMenuItem.Size = new Size(180, 22);
+            ulozOverlayToolStripMenuItem.Size = new Size(145, 22);
             ulozOverlayToolStripMenuItem.Text = "Uloz overlay";
             ulozOverlayToolStripMenuItem.Click += ulozOverlayToolStripMenuItem_Click;
             // 
@@ -133,7 +133,7 @@
             // toolStripCreateDoor
             // 
             toolStripCreateDoor.Name = "toolStripCreateDoor";
-            toolStripCreateDoor.Size = new Size(180, 22);
+            toolStripCreateDoor.Size = new Size(142, 22);
             toolStripCreateDoor.Text = "Create Doors";
             toolStripCreateDoor.Click += toolStripCreateDoor_Click;
             // 
@@ -141,20 +141,8 @@
             // 
             toolStripCreateTrap.DropDownItems.AddRange(new ToolStripItem[] { teleportingToolStripMenuItem });
             toolStripCreateTrap.Name = "toolStripCreateTrap";
-            toolStripCreateTrap.Size = new Size(180, 22);
+            toolStripCreateTrap.Size = new Size(142, 22);
             toolStripCreateTrap.Text = "Create Trap";
-            // 
-            // toolStripCreateItem
-            // 
-            toolStripCreateItem.Name = "toolStripCreateItem";
-            toolStripCreateItem.Size = new Size(142, 22);
-            toolStripCreateItem.Text = "Create Item";
-            // 
-            // toolStripCreateFinish
-            // 
-            toolStripCreateFinish.Name = "toolStripCreateFinish";
-            toolStripCreateFinish.Size = new Size(142, 22);
-            toolStripCreateFinish.Text = "Create Finish";
             // 
             // teleportingToolStripMenuItem
             // 
@@ -162,6 +150,19 @@
             teleportingToolStripMenuItem.Size = new Size(180, 22);
             teleportingToolStripMenuItem.Text = "Teleport";
             teleportingToolStripMenuItem.Click += teleportingToolStripMenuItem_Click;
+            // 
+            // toolStripCreateItem
+            // 
+            toolStripCreateItem.Name = "toolStripCreateItem";
+            toolStripCreateItem.Size = new Size(180, 22);
+            toolStripCreateItem.Text = "Create Item";
+            toolStripCreateItem.Click += toolStripCreateItem_Click;
+            // 
+            // toolStripCreateFinish
+            // 
+            toolStripCreateFinish.Name = "toolStripCreateFinish";
+            toolStripCreateFinish.Size = new Size(142, 22);
+            toolStripCreateFinish.Text = "Create Finish";
             // 
             // Form1
             // 

@@ -225,5 +225,27 @@ namespace MapEditor
             isSelectMode = true;
             this.Cursor = Cursors.Cross;
         }
+
+        private void toolStripCreateItem_Click(object sender, EventArgs e)
+        {
+            var itemEditForm = new ItemEditForm();
+            var result = itemEditForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                var button = CreateObjectContextMenu.SourceControl;
+                var (x, y) = (ValueTuple<int, int>)button.Tag;
+                var item = new Item
+                {
+                    X = x,
+                    Y = y,
+                    Name = itemEditForm.Name,
+                    Description = itemEditForm.Description,
+                    ItemType = itemEditForm.ItemType
+                };
+                mapObjects.Add(item);
+
+                RefreshButtonColors();
+            }
+        }
     }
 }
