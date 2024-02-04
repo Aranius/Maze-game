@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components=new System.ComponentModel.Container();
-            menuStrip1=new MenuStrip();
-            mapaToolStripMenuItem=new ToolStripMenuItem();
-            otvorMapuToolStripMenuItem=new ToolStripMenuItem();
-            otvorOverlayToolStripMenuItem=new ToolStripMenuItem();
-            ulozMapuToolStripMenuItem=new ToolStripMenuItem();
-            ulozOverlayToolStripMenuItem=new ToolStripMenuItem();
-            OpenMapDialog=new OpenFileDialog();
-            SaveMapDialog=new SaveFileDialog();
-            OpenOverlayDialog=new OpenFileDialog();
-            saveOverlayDialog=new SaveFileDialog();
-            descriptionBox=new TextBox();
-            CreateObjectContextMenu=new ContextMenuStrip(components);
-            toolStripCreateDoor=new ToolStripMenuItem();
-            toolStripCreateTrap=new ToolStripMenuItem();
-            toolStripCreateItem=new ToolStripMenuItem();
-            toolStripCreateFinish=new ToolStripMenuItem();
+            components = new System.ComponentModel.Container();
+            menuStrip1 = new MenuStrip();
+            mapaToolStripMenuItem = new ToolStripMenuItem();
+            otvorMapuToolStripMenuItem = new ToolStripMenuItem();
+            otvorOverlayToolStripMenuItem = new ToolStripMenuItem();
+            ulozMapuToolStripMenuItem = new ToolStripMenuItem();
+            ulozOverlayToolStripMenuItem = new ToolStripMenuItem();
+            OpenMapDialog = new OpenFileDialog();
+            SaveMapDialog = new SaveFileDialog();
+            OpenOverlayDialog = new OpenFileDialog();
+            saveOverlayDialog = new SaveFileDialog();
+            descriptionBox = new TextBox();
+            CreateObjectContextMenu = new ContextMenuStrip(components);
+            toolStripCreateDoor = new ToolStripMenuItem();
+            toolStripCreateTrap = new ToolStripMenuItem();
+            toolStripCreateItem = new ToolStripMenuItem();
+            toolStripCreateFinish = new ToolStripMenuItem();
+            teleportingToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             CreateObjectContextMenu.SuspendLayout();
             SuspendLayout();
@@ -52,118 +53,126 @@
             // menuStrip1
             // 
             menuStrip1.Items.AddRange(new ToolStripItem[] { mapaToolStripMenuItem });
-            menuStrip1.Location=new Point(0, 0);
-            menuStrip1.Name="menuStrip1";
-            menuStrip1.Size=new Size(800, 24);
-            menuStrip1.TabIndex=0;
-            menuStrip1.Text="menuStrip1";
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
             // 
             // mapaToolStripMenuItem
             // 
             mapaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { otvorMapuToolStripMenuItem, otvorOverlayToolStripMenuItem, ulozMapuToolStripMenuItem, ulozOverlayToolStripMenuItem });
-            mapaToolStripMenuItem.Name="mapaToolStripMenuItem";
-            mapaToolStripMenuItem.Size=new Size(49, 20);
-            mapaToolStripMenuItem.Text="Mapa";
+            mapaToolStripMenuItem.Name = "mapaToolStripMenuItem";
+            mapaToolStripMenuItem.Size = new Size(49, 20);
+            mapaToolStripMenuItem.Text = "Mapa";
             // 
             // otvorMapuToolStripMenuItem
             // 
-            otvorMapuToolStripMenuItem.Name="otvorMapuToolStripMenuItem";
-            otvorMapuToolStripMenuItem.Size=new Size(145, 22);
-            otvorMapuToolStripMenuItem.Text="Otvor mapu";
-            otvorMapuToolStripMenuItem.Click+=otvorMapuToolStripMenuItem_Click;
+            otvorMapuToolStripMenuItem.Name = "otvorMapuToolStripMenuItem";
+            otvorMapuToolStripMenuItem.Size = new Size(180, 22);
+            otvorMapuToolStripMenuItem.Text = "Otvor mapu";
+            otvorMapuToolStripMenuItem.Click += otvorMapuToolStripMenuItem_Click;
             // 
             // otvorOverlayToolStripMenuItem
             // 
-            otvorOverlayToolStripMenuItem.Name="otvorOverlayToolStripMenuItem";
-            otvorOverlayToolStripMenuItem.Size=new Size(145, 22);
-            otvorOverlayToolStripMenuItem.Text="Otvor overlay";
-            otvorOverlayToolStripMenuItem.Click+=otvorOverlayToolStripMenuItem_Click;
+            otvorOverlayToolStripMenuItem.Name = "otvorOverlayToolStripMenuItem";
+            otvorOverlayToolStripMenuItem.Size = new Size(180, 22);
+            otvorOverlayToolStripMenuItem.Text = "Otvor overlay";
+            otvorOverlayToolStripMenuItem.Click += otvorOverlayToolStripMenuItem_Click;
             // 
             // ulozMapuToolStripMenuItem
             // 
-            ulozMapuToolStripMenuItem.Name="ulozMapuToolStripMenuItem";
-            ulozMapuToolStripMenuItem.Size=new Size(145, 22);
-            ulozMapuToolStripMenuItem.Text="Uloz mapu";
-            ulozMapuToolStripMenuItem.Click+=ulozMapuToolStripMenuItem_Click;
+            ulozMapuToolStripMenuItem.Name = "ulozMapuToolStripMenuItem";
+            ulozMapuToolStripMenuItem.Size = new Size(180, 22);
+            ulozMapuToolStripMenuItem.Text = "Uloz mapu";
+            ulozMapuToolStripMenuItem.Click += ulozMapuToolStripMenuItem_Click;
             // 
             // ulozOverlayToolStripMenuItem
             // 
-            ulozOverlayToolStripMenuItem.Name="ulozOverlayToolStripMenuItem";
-            ulozOverlayToolStripMenuItem.Size=new Size(145, 22);
-            ulozOverlayToolStripMenuItem.Text="Uloz overlay";
-            ulozOverlayToolStripMenuItem.Click+=ulozOverlayToolStripMenuItem_Click;
+            ulozOverlayToolStripMenuItem.Name = "ulozOverlayToolStripMenuItem";
+            ulozOverlayToolStripMenuItem.Size = new Size(180, 22);
+            ulozOverlayToolStripMenuItem.Text = "Uloz overlay";
+            ulozOverlayToolStripMenuItem.Click += ulozOverlayToolStripMenuItem_Click;
             // 
             // OpenMapDialog
             // 
-            OpenMapDialog.DefaultExt="MAP";
-            OpenMapDialog.Filter="Maze Map|*.map";
+            OpenMapDialog.DefaultExt = "MAP";
+            OpenMapDialog.Filter = "Maze Map|*.map";
             // 
             // SaveMapDialog
             // 
-            SaveMapDialog.DefaultExt="MAP";
-            SaveMapDialog.Filter="Maze Map|*.map";
+            SaveMapDialog.DefaultExt = "MAP";
+            SaveMapDialog.Filter = "Maze Map|*.map";
             // 
             // OpenOverlayDialog
             // 
-            OpenOverlayDialog.DefaultExt="state";
-            OpenOverlayDialog.FileName="openFileDialog1";
-            OpenOverlayDialog.Filter="Overlay|*.state";
+            OpenOverlayDialog.DefaultExt = "state";
+            OpenOverlayDialog.FileName = "openFileDialog1";
+            OpenOverlayDialog.Filter = "Overlay|*.state";
             // 
             // saveOverlayDialog
             // 
-            saveOverlayDialog.DefaultExt="state";
-            saveOverlayDialog.Filter="Overlay|*.state";
+            saveOverlayDialog.DefaultExt = "state";
+            saveOverlayDialog.Filter = "Overlay|*.state";
             // 
             // descriptionBox
             // 
-            descriptionBox.Dock=DockStyle.Right;
-            descriptionBox.Location=new Point(700, 24);
-            descriptionBox.Multiline=true;
-            descriptionBox.Name="descriptionBox";
-            descriptionBox.Size=new Size(100, 426);
-            descriptionBox.TabIndex=1;
+            descriptionBox.Dock = DockStyle.Right;
+            descriptionBox.Location = new Point(590, 24);
+            descriptionBox.Multiline = true;
+            descriptionBox.Name = "descriptionBox";
+            descriptionBox.Size = new Size(210, 426);
+            descriptionBox.TabIndex = 1;
             // 
             // CreateObjectContextMenu
             // 
             CreateObjectContextMenu.Items.AddRange(new ToolStripItem[] { toolStripCreateDoor, toolStripCreateTrap, toolStripCreateItem, toolStripCreateFinish });
-            CreateObjectContextMenu.Name="CreateObjectContextMenu";
-            CreateObjectContextMenu.Size=new Size(143, 92);
+            CreateObjectContextMenu.Name = "CreateObjectContextMenu";
+            CreateObjectContextMenu.Size = new Size(181, 114);
             // 
             // toolStripCreateDoor
             // 
-            toolStripCreateDoor.Name="toolStripCreateDoor";
-            toolStripCreateDoor.Size=new Size(142, 22);
-            toolStripCreateDoor.Text="Create Doors";
-            toolStripCreateDoor.Click+=toolStripCreateDoor_Click;
+            toolStripCreateDoor.Name = "toolStripCreateDoor";
+            toolStripCreateDoor.Size = new Size(180, 22);
+            toolStripCreateDoor.Text = "Create Doors";
+            toolStripCreateDoor.Click += toolStripCreateDoor_Click;
             // 
             // toolStripCreateTrap
             // 
-            toolStripCreateTrap.Name="toolStripCreateTrap";
-            toolStripCreateTrap.Size=new Size(142, 22);
-            toolStripCreateTrap.Text="Create Trap";
+            toolStripCreateTrap.DropDownItems.AddRange(new ToolStripItem[] { teleportingToolStripMenuItem });
+            toolStripCreateTrap.Name = "toolStripCreateTrap";
+            toolStripCreateTrap.Size = new Size(180, 22);
+            toolStripCreateTrap.Text = "Create Trap";
             // 
             // toolStripCreateItem
             // 
-            toolStripCreateItem.Name="toolStripCreateItem";
-            toolStripCreateItem.Size=new Size(142, 22);
-            toolStripCreateItem.Text="CreateItem";
+            toolStripCreateItem.Name = "toolStripCreateItem";
+            toolStripCreateItem.Size = new Size(142, 22);
+            toolStripCreateItem.Text = "Create Item";
             // 
             // toolStripCreateFinish
             // 
-            toolStripCreateFinish.Name="toolStripCreateFinish";
-            toolStripCreateFinish.Size=new Size(142, 22);
-            toolStripCreateFinish.Text="CreateFinish";
+            toolStripCreateFinish.Name = "toolStripCreateFinish";
+            toolStripCreateFinish.Size = new Size(142, 22);
+            toolStripCreateFinish.Text = "Create Finish";
+            // 
+            // teleportingToolStripMenuItem
+            // 
+            teleportingToolStripMenuItem.Name = "teleportingToolStripMenuItem";
+            teleportingToolStripMenuItem.Size = new Size(180, 22);
+            teleportingToolStripMenuItem.Text = "Teleport";
+            teleportingToolStripMenuItem.Click += teleportingToolStripMenuItem_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions=new SizeF(7F, 15F);
-            AutoScaleMode=AutoScaleMode.Font;
-            ClientSize=new Size(800, 450);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
             Controls.Add(descriptionBox);
             Controls.Add(menuStrip1);
-            MainMenuStrip=menuStrip1;
-            Name="Form1";
-            Text="Form1";
+            MainMenuStrip = menuStrip1;
+            Name = "Form1";
+            Text = "Form1";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             CreateObjectContextMenu.ResumeLayout(false);
@@ -189,5 +198,6 @@
         private ToolStripMenuItem toolStripCreateTrap;
         private ToolStripMenuItem toolStripCreateItem;
         private ToolStripMenuItem toolStripCreateFinish;
+        private ToolStripMenuItem teleportingToolStripMenuItem;
     }
 }
