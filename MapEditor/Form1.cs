@@ -14,6 +14,11 @@ namespace MapEditor
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Open the map file and create the buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void otvorMapuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var result = OpenMapDialog.ShowDialog();
@@ -62,6 +67,11 @@ namespace MapEditor
             }
         }
 
+        /// <summary>
+        ///  Fill the description box with the information about the object on the map
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         private void FillInformationDescription(int x, int y)
         {
             if (mapObjects == null) return;
