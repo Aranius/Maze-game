@@ -1,9 +1,10 @@
 using MapModel;
 using Maze.Model;
+using System.Diagnostics;
 
 namespace MapEditor
 {
-    public partial class Form1 : Form
+    public partial class Editor : Form
     {
         private Button[,] buttons;
         private bool[,] map;
@@ -11,7 +12,7 @@ namespace MapEditor
         bool isSelectMode = false;
         object selectedObject;
 
-        public Form1()
+        public Editor()
         {
             InitializeComponent();
         }
@@ -73,6 +74,20 @@ namespace MapEditor
                             {
                                 var (x, y) = (ValueTuple<int, int>)((Button)sender).Tag;
                                 FillInformationDescription(x, y);
+                                selectedObject = mapObjects?.FirstOrDefault(o => o.X == x && o.Y == y);
+                                if (selectedObject is Trap trap)
+                                {
+                                    buttons[trap.TeleToX, trap.TeleToY].BackColor = Color.Orange;
+                                }
+                            };
+                            buttons[i, j].MouseLeave += (sender, e) =>
+                            {
+                                var (x, y) = (ValueTuple<int, int>)((Button)sender).Tag;
+                                selectedObject = mapObjects?.FirstOrDefault(o => o.X == x && o.Y == y);
+                                if (selectedObject is Trap trap)
+                                {
+                                    buttons[trap.TeleToX, trap.TeleToY].BackColor = SystemColors.ControlLightLight;
+                                }
                             };
                             buttons[i, j].ContextMenuStrip = CreateObjectContextMenu;
                             Controls.Add(buttons[i, j]);
