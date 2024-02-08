@@ -1,5 +1,6 @@
 ﻿using MapModel;
 using Maze.Model;
+using NetCoreAudio;
 using Newtonsoft.Json;
 using System;
 using System.Data;
@@ -14,7 +15,6 @@ static void Main(string[] args)
         // 1. Create a new maze
 
         int cislo_mapy = 0;
-
 
         var maze = MapFileFunction.LoadMaze(@$"Maps\mapa{cislo_mapy}.map");
 
@@ -158,6 +158,7 @@ static void Main(string[] args)
                 var canContinue = koniec.CanAdvanceToNextLevel(pc);
 
                 if (canContinue) {
+                    koniec.FinishAchieved();
                     cislo_mapy++;
                     maze = MapFileFunction.LoadMaze(@$"Maps\mapa{cislo_mapy}.map");
                     mapa = new List<MapObject> ();

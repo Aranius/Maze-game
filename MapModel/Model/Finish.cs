@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NetCoreAudio;
 
 namespace Maze.Model
 {
@@ -25,6 +26,12 @@ namespace Maze.Model
                     return true;
             }
             return false;
+        }
+
+        public void FinishAchieved()
+        {
+            Player player = new Player();
+            player.Play(@"Sounds\finish_sound.mp3");
         }
 
         public override string ToString()

@@ -20,6 +20,7 @@
     <None Remove="Maps\mapa7.map" />
     <None Remove="Maps\mapa8.map" />
     <None Remove="Maps\mapa9.map" />
+    <None Remove="Sounds\finish_sound.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -59,9 +60,13 @@
     <Content Include="Maps\mapa9.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Sounds\finish_sound.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="NetCoreAudio" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
