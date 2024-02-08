@@ -1,4 +1,5 @@
 using MapModel;
+using Maze.Interfaces;
 using Maze.Model;
 using System.Diagnostics;
 
@@ -46,6 +47,8 @@ namespace MapEditor
                                 Text = map[i, j] ? " " : "#",
                                 Tag = (i, j)
                             };
+                            // Add the event handlers
+                            // Toggle the state of the button and the map cell
                             buttons[i, j].Click += (sender, e) =>
                             {
                                 var (x, y) = (ValueTuple<int, int>)((Button)sender).Tag;
@@ -289,6 +292,16 @@ namespace MapEditor
 
                 RefreshButtonColors();
             }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var button = CreateObjectContextMenu.SourceControl;
+            var (x, y) = (ValueTuple<int, int>)button.Tag;
+
+            mapObjects.RemoveAll(o => o.X == x && o.Y == y);
+
+            buttons[x, y].BackColor = SystemColors.ControlLightLight;
         }
     }
 }                                     

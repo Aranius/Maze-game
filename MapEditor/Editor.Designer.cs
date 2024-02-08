@@ -46,6 +46,8 @@
             teleportingToolStripMenuItem = new ToolStripMenuItem();
             toolStripCreateItem = new ToolStripMenuItem();
             toolStripCreateFinish = new ToolStripMenuItem();
+            deleteToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
             menuStrip1.SuspendLayout();
             CreateObjectContextMenu.SuspendLayout();
             SuspendLayout();
@@ -126,14 +128,14 @@
             // 
             // CreateObjectContextMenu
             // 
-            CreateObjectContextMenu.Items.AddRange(new ToolStripItem[] { toolStripCreateDoor, toolStripCreateTrap, toolStripCreateItem, toolStripCreateFinish });
+            CreateObjectContextMenu.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem, toolStripSeparator1, toolStripCreateDoor, toolStripCreateTrap, toolStripCreateItem, toolStripCreateFinish });
             CreateObjectContextMenu.Name = "CreateObjectContextMenu";
-            CreateObjectContextMenu.Size = new Size(143, 92);
+            CreateObjectContextMenu.Size = new Size(181, 142);
             // 
             // toolStripCreateDoor
             // 
             toolStripCreateDoor.Name = "toolStripCreateDoor";
-            toolStripCreateDoor.Size = new Size(142, 22);
+            toolStripCreateDoor.Size = new Size(180, 22);
             toolStripCreateDoor.Text = "Create Doors";
             toolStripCreateDoor.Click += toolStripCreateDoor_Click;
             // 
@@ -141,7 +143,7 @@
             // 
             toolStripCreateTrap.DropDownItems.AddRange(new ToolStripItem[] { teleportingToolStripMenuItem });
             toolStripCreateTrap.Name = "toolStripCreateTrap";
-            toolStripCreateTrap.Size = new Size(142, 22);
+            toolStripCreateTrap.Size = new Size(180, 22);
             toolStripCreateTrap.Text = "Create Trap";
             // 
             // teleportingToolStripMenuItem
@@ -154,18 +156,30 @@
             // toolStripCreateItem
             // 
             toolStripCreateItem.Name = "toolStripCreateItem";
-            toolStripCreateItem.Size = new Size(142, 22);
+            toolStripCreateItem.Size = new Size(180, 22);
             toolStripCreateItem.Text = "Create Item";
             toolStripCreateItem.Click += toolStripCreateItem_Click;
             // 
             // toolStripCreateFinish
             // 
             toolStripCreateFinish.Name = "toolStripCreateFinish";
-            toolStripCreateFinish.Size = new Size(142, 22);
+            toolStripCreateFinish.Size = new Size(180, 22);
             toolStripCreateFinish.Text = "Create Finish";
             toolStripCreateFinish.Click += toolStripCreateFinish_Click;
             // 
-            // Form1
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(180, 22);
+            deleteToolStripMenuItem.Text = "Delete";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(177, 6);
+            // 
+            // Editor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -173,7 +187,7 @@
             Controls.Add(descriptionBox);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Name = "Form1";
+            Name = "Editor";
             Text = "Form1";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -201,5 +215,7 @@
         private ToolStripMenuItem toolStripCreateItem;
         private ToolStripMenuItem toolStripCreateFinish;
         private ToolStripMenuItem teleportingToolStripMenuItem;
+        private ToolStripMenuItem deleteToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
     }
 }
