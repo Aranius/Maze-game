@@ -77,8 +77,8 @@ namespace MapEditor
                             {
                                 var (x, y) = (ValueTuple<int, int>)((Button)sender).Tag;
                                 FillInformationDescription(x, y);
-                                selectedObject = mapObjects?.FirstOrDefault(o => o.X == x && o.Y == y);
-                                if (selectedObject is Trap trap)
+                                var actaulObject = mapObjects?.FirstOrDefault(o => o.X == x && o.Y == y);
+                                if (actaulObject is Trap trap)
                                 {
                                     buttons[trap.TeleToX, trap.TeleToY].BackColor = Color.Orange;
                                 }
@@ -86,8 +86,8 @@ namespace MapEditor
                             buttons[i, j].MouseLeave += (sender, e) =>
                             {
                                 var (x, y) = (ValueTuple<int, int>)((Button)sender).Tag;
-                                selectedObject = mapObjects?.FirstOrDefault(o => o.X == x && o.Y == y);
-                                if (selectedObject is Trap trap)
+                                var actaulObject = mapObjects?.FirstOrDefault(o => o.X == x && o.Y == y);
+                                if (actaulObject is Trap trap)
                                 {
                                     buttons[trap.TeleToX, trap.TeleToY].BackColor = SystemColors.ControlLightLight;
                                 }
