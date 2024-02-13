@@ -41,13 +41,14 @@
             saveOverlayDialog = new SaveFileDialog();
             descriptionBox = new TextBox();
             CreateObjectContextMenu = new ContextMenuStrip(components);
+            deleteToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
             toolStripCreateDoor = new ToolStripMenuItem();
             toolStripCreateTrap = new ToolStripMenuItem();
             teleportingToolStripMenuItem = new ToolStripMenuItem();
             toolStripCreateItem = new ToolStripMenuItem();
             toolStripCreateFinish = new ToolStripMenuItem();
-            deleteToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator1 = new ToolStripSeparator();
+            createStartToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             CreateObjectContextMenu.SuspendLayout();
             SuspendLayout();
@@ -71,28 +72,28 @@
             // otvorMapuToolStripMenuItem
             // 
             otvorMapuToolStripMenuItem.Name = "otvorMapuToolStripMenuItem";
-            otvorMapuToolStripMenuItem.Size = new Size(145, 22);
+            otvorMapuToolStripMenuItem.Size = new Size(180, 22);
             otvorMapuToolStripMenuItem.Text = "Otvor mapu";
             otvorMapuToolStripMenuItem.Click += otvorMapuToolStripMenuItem_Click;
             // 
             // otvorOverlayToolStripMenuItem
             // 
             otvorOverlayToolStripMenuItem.Name = "otvorOverlayToolStripMenuItem";
-            otvorOverlayToolStripMenuItem.Size = new Size(145, 22);
+            otvorOverlayToolStripMenuItem.Size = new Size(180, 22);
             otvorOverlayToolStripMenuItem.Text = "Otvor overlay";
             otvorOverlayToolStripMenuItem.Click += otvorOverlayToolStripMenuItem_Click;
             // 
             // ulozMapuToolStripMenuItem
             // 
             ulozMapuToolStripMenuItem.Name = "ulozMapuToolStripMenuItem";
-            ulozMapuToolStripMenuItem.Size = new Size(145, 22);
+            ulozMapuToolStripMenuItem.Size = new Size(180, 22);
             ulozMapuToolStripMenuItem.Text = "Uloz mapu";
             ulozMapuToolStripMenuItem.Click += ulozMapuToolStripMenuItem_Click;
             // 
             // ulozOverlayToolStripMenuItem
             // 
             ulozOverlayToolStripMenuItem.Name = "ulozOverlayToolStripMenuItem";
-            ulozOverlayToolStripMenuItem.Size = new Size(145, 22);
+            ulozOverlayToolStripMenuItem.Size = new Size(180, 22);
             ulozOverlayToolStripMenuItem.Text = "Uloz overlay";
             ulozOverlayToolStripMenuItem.Click += ulozOverlayToolStripMenuItem_Click;
             // 
@@ -128,9 +129,21 @@
             // 
             // CreateObjectContextMenu
             // 
-            CreateObjectContextMenu.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem, toolStripSeparator1, toolStripCreateDoor, toolStripCreateTrap, toolStripCreateItem, toolStripCreateFinish });
+            CreateObjectContextMenu.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem, toolStripSeparator1, toolStripCreateDoor, toolStripCreateTrap, toolStripCreateItem, createStartToolStripMenuItem, toolStripCreateFinish });
             CreateObjectContextMenu.Name = "CreateObjectContextMenu";
-            CreateObjectContextMenu.Size = new Size(181, 142);
+            CreateObjectContextMenu.Size = new Size(181, 164);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(180, 22);
+            deleteToolStripMenuItem.Text = "Delete";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(177, 6);
             // 
             // toolStripCreateDoor
             // 
@@ -167,17 +180,12 @@
             toolStripCreateFinish.Text = "Create Finish";
             toolStripCreateFinish.Click += toolStripCreateFinish_Click;
             // 
-            // deleteToolStripMenuItem
+            // createStartToolStripMenuItem
             // 
-            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(180, 22);
-            deleteToolStripMenuItem.Text = "Delete";
-            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            createStartToolStripMenuItem.Name = "createStartToolStripMenuItem";
+            createStartToolStripMenuItem.Size = new Size(180, 22);
+            createStartToolStripMenuItem.Text = "Create Start";
+            createStartToolStripMenuItem.Click += createStartToolStripMenuItem_Click;
             // 
             // Editor
             // 
@@ -217,5 +225,6 @@
         private ToolStripMenuItem teleportingToolStripMenuItem;
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem createStartToolStripMenuItem;
     }
 }

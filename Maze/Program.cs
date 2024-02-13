@@ -19,63 +19,19 @@ static void Main(string[] args)
         var maze = MapFileFunction.LoadMaze(@$"Maps\mapa{cislo_mapy}.map");
 
         // 2. Create a new player
-        PC pc = new PC { X = 0, Y = 0 };
+        PC pc = new PC();
         string vysledok = string.Empty;
-
-        //var gen = new Maze(31,51);
-        //maze = gen.Generate();
-
-        // 3. Create a map of the maze
-        //var mapa = new List<MapObject>();
-        //mapa.Add(new Door(0, 3, true));
-
-        //mapa.Add(new Item
-        //{
-        //    X = 19,
-        //    Y = 7,
-        //    ItemType = ItemTypeEnum.Key,
-        //    Name = "Kluc",
-        //    Description = "Stary hrdzavy kluc."
-        //});
-
-        //var poklad = new Item
-        //{
-        //    X = 18,
-        //    Y = 0,
-        //    ItemType = ItemTypeEnum.Treasure,
-        //    Name = "slivkove pivo",
-        //    Description = "Stankovo lednicka."
-        //};
-
-
-        //mapa.Add(poklad);
-
-        //mapa.Add(new Trap { X = 3, Y = 0, TeleToX = 0, TeleToY = 0 });
-
-        //mapa.Add(new Trap { X = 12, Y = 0, TeleToX = 18, TeleToY = 7 });
-
-        //var finish = new Finish
-        //{
-        //    X = 19,
-        //    Y = 9
-        //};
-        //finish.FullfillmentConditionList.Add(poklad);
-        //mapa.Add(finish);
-
-
-        //MapFileFunction.SaveMapObjects(mapa, "mapa0.state");
 
         var mapa = MapFileFunction.LoadMapObjects(@$"Maps\mapa{cislo_mapy}.state");
 
-        int[] end = new int[] { maze.GetLength(0) -1, maze.GetLength(1)-1 };
-        //int[] current = new int[] { 0, 0 };
-        ///            X         X             Y         Y       
+        SetStartForPC(pc, mapa);
+
         while (true)
         {
             Console.Clear();
 
             // 4. Print the maze
-            PrintMaze(maze, pc.X, pc.Y, end[0], end[1], mapa);
+            PrintMaze(maze, pc.X, pc.Y, maze.GetLength(0) -1, maze.GetLength(1)-1, mapa);
 
             Console.WriteLine("Use arrow keys to move!");
             Console.WriteLine("Use O to observe.");
@@ -122,7 +78,7 @@ static void Main(string[] args)
                         vysledok = pc.TakeItem(mapa);
                     }
                     break;
-                    // 6. Use item
+                // 6. Use item
                 case ConsoleKey.U:
                     {
                         var surroundings = mapa.Where(m =>
@@ -144,7 +100,7 @@ static void Main(string[] args)
                     break;
             }
 
-            MapObject currentObject = mapa.FirstOrDefault(m=> m.X == pc.X && m.Y == pc.Y);
+            MapObject currentObject = mapa.FirstOrDefault(m => m.X == pc.X && m.Y == pc.Y);
 
             // 7. Check if the player has stepped on a trap
             if (currentObject is Trap pasca)
@@ -157,19 +113,34 @@ static void Main(string[] args)
             {
                 var canContinue = koniec.CanAdvanceToNextLevel(pc);
 
-                if (canContinue) {
+                if (canContinue)
+                {
                     koniec.FinishAchieved();
                     cislo_mapy++;
                     maze = MapFileFunction.LoadMaze(@$"Maps\mapa{cislo_mapy}.map");
-                    mapa = new List<MapObject> ();
-                    pc.X = 0;
-                    pc.Y = 0;
+                    mapa = MapFileFunction.LoadMapObjects(@$"Maps\mapa{cislo_mapy}.state");
+                    SetStartForPC(pc, mapa);
                 }
                 else
                 {
                     vysledok = $"Najdi {ItemTypeEnum.Treasure} a pak se vrať.";
                 }
             }
+        }
+    }
+
+    private static void SetStartForPC(PC pc, List<MapObject> mapa)
+    {
+        var start = mapa.FirstOrDefault(m => m.ObjectType == ObjectTypeEnum.Start);
+        if (start != null)
+        {
+            pc.X = start.X;
+            pc.Y = start.Y;
+        }
+        else
+        {
+            pc.X = 0;
+            pc.Y = 0;
         }
     }
 

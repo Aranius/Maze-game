@@ -22,4 +22,6 @@ public enum ObjectTypeEnum
     Door = 2,
     Trap = 3,
     Item = 4,
+    Start = 5,
+    Finish = 6
 }

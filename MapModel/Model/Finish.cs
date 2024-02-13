@@ -14,6 +14,7 @@ namespace Maze.Model
         public Finish() 
         { 
             FullfillmentConditionList = new List<Item>();
+            ObjectType = ObjectTypeEnum.Finish;
         }
 
         public bool CanAdvanceToNextLevel(PC pc)

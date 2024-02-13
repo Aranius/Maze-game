@@ -1,4 +1,5 @@
 using MapModel;
+using MapModel.Model;
 using Maze.Interfaces;
 using Maze.Model;
 using System.Diagnostics;
@@ -184,6 +185,9 @@ namespace MapEditor
                     case Door:
                         color = Color.Brown;
                         break;
+                    case Start:
+                        color = Color.Yellow;
+                        break;
                     case Finish:
                         color = Color.Green;
                         break;
@@ -302,6 +306,20 @@ namespace MapEditor
             mapObjects.RemoveAll(o => o.X == x && o.Y == y);
 
             buttons[x, y].BackColor = SystemColors.ControlLightLight;
+        }
+
+        private void createStartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var button = CreateObjectContextMenu.SourceControl;
+            var (x, y) = (ValueTuple<int, int>)button.Tag;
+            var start = new Start()
+            {
+                X = x,
+                Y = y
+            };
+            mapObjects.Add(start);
+
+            RefreshButtonColors();
         }
     }
 }                                     
