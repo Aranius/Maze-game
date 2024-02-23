@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapModel.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,11 +12,13 @@ namespace Maze.Model
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public List<Stat> StatBoosts { get; set; }
         public ItemTypeEnum ItemType { get; set; }
 
         public Item()
         {
             ObjectType = ObjectTypeEnum.Item;
+            StatBoosts = new List<Stat>();
         }
 
         public override string ToString()

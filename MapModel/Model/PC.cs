@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapModel.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,7 +10,12 @@ namespace Maze.Model
 {
     public class PC : Creature
     {
+        public int Level { get; set; }
+        public int XP { get; set; }
+        public int NextLevelXP { get; set; }
+
         public List<Item> Inventory { get; set; }
+        public Dictionary<string, Item> Equipment { get; set; }
 
         public PC()
         {
@@ -59,6 +65,53 @@ namespace Maze.Model
             }
 
             return "Nie je tu nic na pouzitie";
+        }
+
+        public void EarnXP(int amount)
+        {
+            XP += amount;
+            if (XP >= NextLevelXP)
+            {
+                LevelUp();
+            }
+        }
+
+        void LevelUp()
+        {
+            Level++;
+            Health += 10;  // Increase Health by 10 each level
+            Attack += Level;  // Increase Attack by current Level
+            Defense += Level;  // Increase Defense by current Level
+            Speed += Level;  // Increase Speed by current Level
+            NextLevelXP = Level * 100;  // Increase XP needed for next level
+        }
+
+        public void Equip(string slot, Item item)
+        {
+            Equipment[slot] = item;
+            ApplyStatBoosts(item.StatBoosts);
+        }
+
+        private void ApplyStatBoosts(List<Stat> statBoosts)
+        {
+            foreach (var stat in statBoosts)
+            {
+                switch (stat.Name)
+                {
+                    case "Attack":
+                        Attack += stat.Value;
+                        break;
+                    case "Defense":
+                        Defense += stat.Value;
+                        break;
+                    case "Speed":
+                        Speed += stat.Value;
+                        break;
+                    case "Health":
+                        Health += stat.Value;
+                        break;
+                }
+            }
         }
     }
 }
