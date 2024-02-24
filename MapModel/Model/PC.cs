@@ -16,6 +16,7 @@ namespace Maze.Model
 
         public List<Item> Inventory { get; set; }
         public Dictionary<string, Item> Equipment { get; set; }
+        public int Gold { get; set; }
 
         public PC()
         {

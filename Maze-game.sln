@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maze", "Maze\Maze.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapGenerator", "MapGenerator\MapGenerator.csproj", "{9292458B-E619-41E8-9D98-DEB71F2ECE1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditor", "MapEditor\MapEditor.csproj", "{9FE72885-D08B-4610-A95C-1D3AC5BEF25F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapEditor", "MapEditor\MapEditor.csproj", "{9FE72885-D08B-4610-A95C-1D3AC5BEF25F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapModel", "MapModel\MapModel.csproj", "{448DC0DD-1022-4797-99B6-C886F8001E41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapModel", "MapModel\MapModel.csproj", "{448DC0DD-1022-4797-99B6-C886F8001E41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0CC22D4D-CD23-4561-9EF4-7B824CB517E4}"
+	ProjectSection(SolutionItems) = preProject
+		ToTeach.txt = ToTeach.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,6 +14,7 @@ namespace Maze.Model
         public string Description { get; set; }
         public List<Stat> StatBoosts { get; set; }
         public ItemTypeEnum ItemType { get; set; }
+        public Action<PC> OnUse { get; set; }
 
         public Item()
         {
