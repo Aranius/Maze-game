@@ -41,7 +41,13 @@ namespace MapModel
         {
             var obsah = File.ReadAllText(nazov_suboru);
 
-            return JsonConvert.DeserializeObject<List<MapObject>>(obsah, serializerSettings);
+            var result = JsonConvert.DeserializeObject<List<MapObject>>(obsah, serializerSettings);
+
+            if (result != null)
+            {
+                return result;
+            }
+            throw new Exception("Chyba pri nacitani suboru");
         }
 
         public static void SaveMapObjects(List<MapObject> mapObjects, string nazov_suboru)
