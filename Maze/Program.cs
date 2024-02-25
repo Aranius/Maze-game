@@ -1,30 +1,81 @@
 ﻿using MapModel;
+using Maze;
 using Maze.Model;
 using NetCoreAudio;
 using Newtonsoft.Json;
 using System;
 using System.Data;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 
 class Program
 {
-static void Main(string[] args)
+    static bool exitFlag = false;
+
+    static int cislo_mapy;
+    static bool[,] maze;
+    static PC pc;
+    static string vysledok;
+    static List<MapObject> mapa;
+    static void Main(string[] args)
     {
-        // 1. Create a new maze
 
-        int cislo_mapy = 0;
+        Player player = new Player();
+        player.Play(@"Music\main_theme.mp3");
 
-        var maze = MapFileFunction.LoadMaze(@$"Maps\mapa{cislo_mapy}.map");
+        Thread newThread = new Thread(StarTwinkling);
 
-        // 2. Create a new player
-        PC pc = new PC();
-        string vysledok = string.Empty;
+        int leftMargin = (Console.WindowWidth - 40) / 2;
+        int topMargin = (Console.WindowHeight - 20) / 2;
+        var frame = Tools.CreateFrame(40, 20, leftMargin);
 
-        var mapa = MapFileFunction.LoadMapObjects(@$"Maps\mapa{cislo_mapy}.state");
+        Console.WriteLine(frame);
 
-        SetStartForPC(pc, mapa);
+        Console.SetCursorPosition(leftMargin + 10, topMargin + 1);
+
+        Tools.PrintInMiddle("Welcome to the maze game!");
+        Console.WriteLine();
+        Tools.PrintInMiddle("N - New game");
+        Tools.PrintInMiddle("L - Load game");
+        Tools.PrintInMiddle("C - Continue game");
+        Tools.PrintInMiddle("Q - Quit game");
+
+        bool validChoice = true;
+        newThread.Start();
+            
+        while (validChoice)
+        {
+
+
+            var choice = Console.ReadKey();
+
+            switch (choice.Key)
+            {
+                case ConsoleKey.N:
+                    NewGame(out cislo_mapy, out maze, out pc, out mapa);
+                    validChoice = false;
+                    break;
+                case ConsoleKey.L:
+                    LoadGame();
+                    break;
+                case ConsoleKey.C:
+                    ContinueGame();
+                    break;
+                case ConsoleKey.Q:
+                    Console.Clear();
+                    return;
+
+                default:
+                    break;
+            }
+        }
+
+        exitFlag = true;
+        player.Stop();
+        vysledok =string.Empty;
 
         while (true)
         {
@@ -129,6 +180,85 @@ static void Main(string[] args)
         }
     }
 
+    class Star
+    {
+        public int Left { get; set; }
+        public int Top { get; set; }
+        public int TimeToLive { get; set; }
+    }
+
+    static void StarTwinkling()
+    {
+        List<Star> stars = new List<Star>();
+        Random rand = new Random();
+
+        while (!exitFlag)
+        {
+            // Generate a random position for the star
+            int left = rand.Next(0, Console.WindowWidth);
+            int top = rand.Next(0, Console.WindowHeight);
+
+            // Check if the position is in the excluded area
+            if (left >= 38 && left <= 77 && top >= 0 && top <= 19)
+            {
+                // This position is in the excluded area, skip this iteration
+                continue;
+            }
+
+            // Add the star to the list
+            stars.Add(new Star { Left = left, Top = top, TimeToLive = rand.Next(1000, 10000) });
+
+            // Show all stars
+            foreach (var star in stars)
+            {
+                Console.SetCursorPosition(star.Left, star.Top);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("*");
+            }
+
+            // Wait for a random time before the next iteration
+            Thread.Sleep(500);
+
+            foreach (var star in stars)
+            {
+                star.TimeToLive -= 500;
+            }
+
+            var startToRemove = stars.Where(s => s.TimeToLive <= 0).ToList();
+            foreach (var star in startToRemove)
+            {
+                Console.SetCursorPosition(star.Left, star.Top);
+                Console.Write(" ");
+                stars.Remove(star);
+            }
+
+        }
+    }
+
+    private static void NewGame(out int cislo_mapy, out bool[,] maze, out PC pc, out List<MapObject> mapa)
+    {
+        // 1. Create a new maze
+
+        cislo_mapy =0;
+        maze =MapFileFunction.LoadMaze(@$"Maps\mapa{cislo_mapy}.map");
+
+        // 2. Create a new player
+        pc =new PC();
+
+        mapa =MapFileFunction.LoadMapObjects(@$"Maps\mapa{cislo_mapy}.state");
+        SetStartForPC(pc, mapa);
+    }
+
+    private static void ContinueGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void LoadGame()
+    {
+        throw new NotImplementedException();
+    }
+
     private static void SetStartForPC(PC pc, List<MapObject> mapa)
     {
         var start = mapa.FirstOrDefault(m => m.ObjectType == ObjectTypeEnum.Start);
@@ -183,7 +313,7 @@ static void Main(string[] args)
                     continue;
                 }
 
-                MapObject currentObject = mapa.FirstOrDefault(m=> m.X == y && m.Y == x);
+                MapObject currentObject = mapa.FirstOrDefault(m => m.X == y && m.Y == x);
 
                 if (currentObject is Door dvere)
                 {

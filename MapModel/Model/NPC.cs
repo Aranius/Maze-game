@@ -12,7 +12,7 @@ namespace Maze.Model
     {
         public Dialogue CurrentDialogue { get; set; }
 
-        public void TalkToPlayer(Player player)
+        public void TalkToPlayer(PC player)
         {
             Console.WriteLine(CurrentDialogue.Text);
 
