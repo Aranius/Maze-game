@@ -5,6 +5,7 @@ using NetCoreAudio;
 using Newtonsoft.Json;
 using System;
 using System.Data;
+using System.IO.Compression;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -63,6 +64,7 @@ class Program
                     break;
                 case ConsoleKey.C:
                     ContinueGame();
+                    validChoice = false;
                     break;
                 case ConsoleKey.Q:
                     Console.Clear();
@@ -88,6 +90,7 @@ class Program
             Console.WriteLine("Use O to observe.");
             Console.WriteLine("Use P to pickup item.");
             Console.WriteLine("Use U to use item.");
+            Console.WriteLine("F5 to save game.");
             Console.WriteLine(vysledok);
             vysledok = string.Empty;
             var input = Console.ReadKey();
@@ -146,6 +149,11 @@ class Program
 
                     }
                     break;
+                    case ConsoleKey.F5:
+                    {
+                        SaveGame();
+                    }
+                    break;
                 default:
                     Console.WriteLine("Invalid input.");
                     break;
@@ -178,6 +186,43 @@ class Program
                 }
             }
         }
+    }
+
+    private static void SaveGame()
+    {
+        JsonSerializerSettings serializerSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+        };
+
+        using Stream stream = new FileStream("save.zip", FileMode.Create);
+        ZipArchive zip = new ZipArchive(stream, ZipArchiveMode.Create);
+        
+        zip.CreateEntryFromFile($"Maps\\mapa{cislo_mapy}.map", $"mapa.map");
+
+        var aktualny_state = zip.CreateEntry("actual_state.state");        
+        using (StreamWriter writer = new StreamWriter(aktualny_state.Open()))
+        {
+            writer.Write(JsonConvert.SerializeObject(mapa, serializerSettings));
+        }
+        
+        var pc_state = zip.CreateEntry("pc.state");
+        using (StreamWriter writer = new StreamWriter(pc_state.Open()))
+        {
+            writer.Write(JsonConvert.SerializeObject(pc, serializerSettings));
+        }
+
+        var level = zip.CreateEntry("level.txt");
+        using (StreamWriter writer = new StreamWriter(level.Open()))
+        {
+            writer.WriteLine(cislo_mapy);
+            writer.WriteLine(maze.GetLength(0));
+            writer.WriteLine(maze.GetLength(1));
+        }
+
+
+        zip.Dispose();
     }
 
     class Star
@@ -246,12 +291,63 @@ class Program
         pc =new PC();
 
         mapa =MapFileFunction.LoadMapObjects(@$"Maps\mapa{cislo_mapy}.state");
+        
         SetStartForPC(pc, mapa);
     }
 
     private static void ContinueGame()
     {
-        throw new NotImplementedException();
+        JsonSerializerSettings serializerSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects
+        };
+
+        if (File.Exists("save.zip"))
+        {
+            int sirka;
+            int vyska;
+
+            using Stream stream = new FileStream("save.zip", FileMode.Open);
+            ZipArchive zip = new ZipArchive(stream, ZipArchiveMode.Read);
+            var level = zip.GetEntry("level.txt");
+            using (StreamReader reader = new StreamReader(level.Open()))
+            {
+                cislo_mapy = int.Parse(reader.ReadLine());
+                vyska = int.Parse(reader.ReadLine());
+                sirka = int.Parse(reader.ReadLine());
+            }
+
+            var map = zip.GetEntry("mapa.map");
+            using (StreamReader reader = new StreamReader(map.Open()))
+            {
+                maze = new bool[vyska, sirka];
+                for (int i = 0; i < vyska; i++)
+                {
+                    var line = reader.ReadLine();
+                    for (int j = 0; j < sirka; j++)
+                    {
+                        maze[i, j] = line[j] == '1';
+                    }
+                }
+            }
+
+            var actual_state = zip.GetEntry("actual_state.state");
+            using (StreamReader reader = new StreamReader(actual_state.Open()))
+            {
+                mapa = JsonConvert.DeserializeObject<List<MapObject>>(reader.ReadToEnd(), serializerSettings);
+            }
+
+            var pc_state = zip.GetEntry("pc.state");
+            using (StreamReader reader = new StreamReader(pc_state.Open()))
+            {
+                pc = JsonConvert.DeserializeObject<PC>(reader.ReadToEnd());
+            }
+        }
+        else
+        {
+            Console.WriteLine("No save file found.");
+        }
     }
 
     private static void LoadGame()
@@ -337,12 +433,16 @@ class Program
                         if (currentObject is Item)
                         {
                             Console.Write(".");
-                        }
-
-                        if (currentObject is Trap pasca)
+                        } 
+                        else if (currentObject is Trap pasca)
                         {
                             Console.Write(pasca.IsActive ? " " : "X");
                         }
+                        else
+                        {
+                            Console.Write(" ");
+                        }
+
                     }
                     else
                     {
