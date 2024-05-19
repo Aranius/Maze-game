@@ -1,22 +1,24 @@
-﻿using MapModel.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MapModel.Model
 {
-    public class Item : MapObject
+    public class Consumable : Item
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public List<Stat> StatBoosts { get; set; }
-        public ItemTypeEnum ItemType { get; set; }
-        public Action<PC> OnUse { get; set; }
+        public ConsumableTypeEnum ConsumableType { get; set; }
 
-        public Item()
+        public enum ConsumableTypeEnum
+        {
+            HealthPotion,
+            SpeedPotion,
+            AttackPotion,
+            DefensePotion
+        }
+
+        public Consumable()
         {
             ObjectType = ObjectTypeEnum.Item;
             StatBoosts = new List<Stat>();
@@ -28,13 +30,5 @@ namespace MapModel.Model
             return $"Item{el}X: {X}{el}Y: {Y}{el}{nameof(Name)}: {Name}{el}{nameof(Description)}: {Description}{el}" +
                 $"{nameof(ItemType)}: {ItemType}";
         }
-    }
-
-    public enum ItemTypeEnum
-    {
-        Key,
-        Equipment,
-        Consumable,
-        Treasure,
     }
 }

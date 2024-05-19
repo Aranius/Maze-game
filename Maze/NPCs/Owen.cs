@@ -1,5 +1,4 @@
 ﻿using MapModel.Model;
-using Maze.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,3 +1,4 @@
+using MapEditor.EditForms;
 using MapModel;
 using MapModel.Model;
 using Maze.Interfaces;
@@ -320,6 +321,30 @@ namespace MapEditor
             mapObjects.Add(start);
 
             RefreshButtonColors();
+        }
+
+        private void equipmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var equipmentEditForm = new EqiupmentEditForm();
+            var result = equipmentEditForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                var button = CreateObjectContextMenu.SourceControl;
+                var (x, y) = (ValueTuple<int, int>)button.Tag;
+                var item = new Equipment
+                {
+                    X = x,
+                    Y = y,
+                    Name = equipmentEditForm.Name,
+                    Description = equipmentEditForm.Description,
+                    ItemType = ItemTypeEnum.Equipment,
+                    EquipemntType = equipmentEditForm.EquipmentType,
+                    StatBoosts = equipmentEditForm.Staty                    
+                };
+                mapObjects.Add(item);
+
+                RefreshButtonColors();
+            }
         }
     }
 }                                     

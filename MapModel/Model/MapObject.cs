@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.ObjectiveC;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maze.Model
+namespace MapModel.Model
 {
     public abstract class MapObject
     {

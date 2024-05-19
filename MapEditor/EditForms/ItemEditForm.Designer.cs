@@ -82,7 +82,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Key", "Weapon", "Shield", "Armor", "Potion", "Treasure" });
+            comboBox1.Items.AddRange(new object[] { "Key", "Potion", "Treasure" });
             comboBox1.Location = new Point(88, 68);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(304, 23);

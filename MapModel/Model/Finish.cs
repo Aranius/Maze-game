@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NetCoreAudio;
 
-namespace Maze.Model
+namespace MapModel.Model
 {
     public class Finish : MapObject
     {    

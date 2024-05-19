@@ -1,16 +1,22 @@
-﻿using MapModel.Model;
-using NetCoreAudio;
+﻿using NetCoreAudio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maze.Model
+namespace MapModel.Model
 {
     public class NPC : Creature
     {
         public Dialogue CurrentDialogue { get; set; }
+
+        public List<Item> Inventory { get; set; }
+
+        public NPC()
+        {
+            Inventory = new List<Item>();
+        }
 
         public void TalkToPlayer(PC player)
         {

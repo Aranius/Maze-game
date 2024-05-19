@@ -1,5 +1,4 @@
-﻿using Maze.Model;
-using NetCoreAudio;
+﻿using NetCoreAudio;
 using System;
 using System.Collections.Generic;
 using System.Linq;

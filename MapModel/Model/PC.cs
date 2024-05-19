@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maze.Model
+namespace MapModel.Model
 {
     public class PC : Creature
     {
@@ -15,13 +15,14 @@ namespace Maze.Model
         public int NextLevelXP { get; set; }
 
         public List<Item> Inventory { get; set; }
-        public Dictionary<string, Item> Equipment { get; set; }
+        public Dictionary<string, Equipment> Equipment { get; set; }
         public int Gold { get; set; }
 
         public PC()
         {
             ObjectType = ObjectTypeEnum.PC;
             Inventory = new List<Item>();
+            Equipment = new Dictionary<string, Equipment>();
         }
 
         public string TakeItem(List<MapObject> mapa)
@@ -87,32 +88,62 @@ namespace Maze.Model
             NextLevelXP = Level * 100;  // Increase XP needed for next level
         }
 
-        public void Equip(string slot, Item item)
-        {
-            Equipment[slot] = item;
-            ApplyStatBoosts(item.StatBoosts);
-        }
-
         private void ApplyStatBoosts(List<Stat> statBoosts)
         {
             foreach (var stat in statBoosts)
             {
-                switch (stat.Name)
+                switch (stat.StatType)
                 {
-                    case "Attack":
+                    case Stat.StatEnum.Attack:
                         Attack += stat.Value;
                         break;
-                    case "Defense":
+                    case Stat.StatEnum.Defense:
                         Defense += stat.Value;
                         break;
-                    case "Speed":
+                    case Stat.StatEnum.Speed:
                         Speed += stat.Value;
                         break;
-                    case "Health":
+                    case Stat.StatEnum.Health:
                         Health += stat.Value;
+                        break;  
+                }   
+            }
+        }
+
+        private void RemoveStatBoosts(List<Stat> statBoosts)
+        {
+            foreach (var stat in statBoosts)
+            {
+                switch (stat.StatType)
+                {
+                    case Stat.StatEnum.Attack:
+                        Attack -= stat.Value;
+                        break;
+                    case Stat.StatEnum.Defense:
+                        Defense -= stat.Value;
+                        break;
+                    case Stat.StatEnum.Speed:
+                        Speed -= stat.Value;
+                        break;
+                    case Stat.StatEnum.Health:
+                        Health -= stat.Value;
                         break;
                 }
             }
+        }
+
+        public void EquipItem(Equipment equipment)
+        {
+            if (Equipment.ContainsKey(equipment.EquipemntType.ToString()))
+            {
+                var item = Equipment[equipment.EquipemntType.ToString()];
+                //Equipment.Remove(equipment.EquipemntType.ToString());
+                //Inventory.Add(item);
+                RemoveStatBoosts(item.StatBoosts);
+            }
+
+            Equipment[equipment.EquipemntType.ToString()] = equipment;
+            ApplyStatBoosts(equipment.StatBoosts);
         }
     }
 }

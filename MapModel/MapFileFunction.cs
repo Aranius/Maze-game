@@ -1,4 +1,4 @@
-﻿using Maze.Model;
+﻿using MapModel.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using MapModel;
+using MapModel.Model;
 using Maze;
-using Maze.Model;
 using NetCoreAudio;
 using Newtonsoft.Json;
 using System;
@@ -90,6 +90,7 @@ class Program
             Console.WriteLine("Use O to observe.");
             Console.WriteLine("Use P to pickup item.");
             Console.WriteLine("Use U to use item.");
+            Console.WriteLine("Use I to open inventory.");
             Console.WriteLine("F5 to save game.");
             Console.WriteLine(vysledok);
             vysledok = string.Empty;
@@ -149,6 +150,11 @@ class Program
 
                     }
                     break;
+                case ConsoleKey.I:
+                    {
+                        OpenInventory();
+                    }
+                    break;
                     case ConsoleKey.F5:
                     {
                         SaveGame();
@@ -188,11 +194,67 @@ class Program
         }
     }
 
+    private static void OpenInventory()
+    {
+        int cursor = 0;
+
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Inventory:");
+            for (int i = 0; i<pc.Inventory.Count; i++)
+            {
+                Item? item = pc.Inventory[i];
+                Console.WriteLine($"{(cursor == i ? "=>" : "  ")} {(item.ItemType == ItemTypeEnum.Equipment ? $"[{(item.IsEquiped(pc) ? "*" : " ")}]" : "   ")} {item.Name} {item.Description}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Equip item: E");
+            Console.WriteLine("Press ESC to exit.");
+
+            var input = Console.ReadKey();
+
+            // Move the cursor
+            switch (input.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    if (cursor > 0)
+                    {
+                        cursor--;
+                    }
+                    break;
+                case ConsoleKey.DownArrow:
+                    if (cursor < pc.Inventory.Count -1)
+                    {
+                        cursor++;
+                    }
+                    break;
+                case ConsoleKey.E:
+                    switch (pc.Inventory[cursor].ItemType)
+                    {
+                        case ItemTypeEnum.Equipment:
+                            var eq = pc.Inventory[cursor] as Equipment;
+                            pc.EquipItem(eq);
+                            break;
+                        case ItemTypeEnum.Consumable:
+                            pc.UseItem((Consumable)pc.Inventory[cursor], maze);
+                            break;
+                    }
+                    break;
+
+                case ConsoleKey.Escape:
+                    return;
+
+            }
+        }
+         
+    }
+
     private static void SaveGame()
     {
         JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {
-            TypeNameHandling = TypeNameHandling.Auto,
+            TypeNameHandling = TypeNameHandling.All,
             PreserveReferencesHandling = PreserveReferencesHandling.Objects,
         };
 
@@ -299,7 +361,7 @@ class Program
     {
         JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {
-            TypeNameHandling = TypeNameHandling.Auto,
+            TypeNameHandling = TypeNameHandling.All,
             PreserveReferencesHandling = PreserveReferencesHandling.Objects
         };
 

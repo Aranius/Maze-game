@@ -8,12 +8,20 @@ namespace MapModel.Model
 {
     public class Stat
     {
-        public string Name { get; set; }
+        public StatEnum StatType { get; set; }
         public int Value { get; set; }
 
-        public Stat(string name, int value)
+        public enum StatEnum
         {
-            Name = name;
+            Attack,
+            Defense,
+            Speed,
+            Health
+        }
+
+        public Stat(StatEnum statType, int value)
+        {
+            StatType = statType;
             Value = value;
         }
     }
