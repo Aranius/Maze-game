@@ -46,7 +46,7 @@ namespace MapModel.Model
         public void FinishAchieved()
         {
             Player player = new Player();
-            player.Play(@"Sounds\finish_sound.mp3");
+            player.Play(@"Sounds/finish_sound.mp3");
         }
         /// <summary>
         /// Vypise kam dojit a jake predmety jsou podminkou pro prechod na dalsi level.

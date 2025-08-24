@@ -20,19 +20,56 @@ namespace MapModel.Model
 
         public void TalkToPlayer(PC player)
         {
-            Console.WriteLine(CurrentDialogue.Text);
-
-            for (int i = 0; i < CurrentDialogue.Responses.Count; i++)
+            if (CurrentDialogue == null)
             {
-                Console.WriteLine($"{i + 1}. {CurrentDialogue.Responses[i].Text}");
+                Console.WriteLine("This NPC has nothing to say.");
+                return;
             }
 
-            int playerChoice = Convert.ToInt32(Console.ReadLine()) - 1;
+            Console.WriteLine(CurrentDialogue.Text);
 
-            if (playerChoice >= 0 && playerChoice < CurrentDialogue.Responses.Count)
+            if (CurrentDialogue.Responses?.Count > 0)
             {
-                CurrentDialogue = CurrentDialogue.Responses[playerChoice];
-                CurrentDialogue.OnChosen?.Invoke(player);
+                Console.WriteLine("\nChoose your response:");
+                for (int i = 0; i < CurrentDialogue.Responses.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {CurrentDialogue.Responses[i].Text}");
+                }
+
+                Console.Write("\nYour choice (number): ");
+                string? input = Console.ReadLine();
+                
+                if (int.TryParse(input, out int playerChoice))
+                {
+                    playerChoice--; // Convert to 0-based index
+                    
+                    if (playerChoice >= 0 && playerChoice < CurrentDialogue.Responses.Count)
+                    {
+                        var selectedResponse = CurrentDialogue.Responses[playerChoice];
+                        selectedResponse.OnChosen?.Invoke(player);
+                        
+                        // If the selected response has further responses, continue the dialogue
+                        if (selectedResponse.Responses?.Count > 0)
+                        {
+                            CurrentDialogue = selectedResponse;
+                            Console.WriteLine("\nPress any key to continue the conversation...");
+                            Console.ReadKey();
+                            TalkToPlayer(player); // Recursive call for multi-level dialogue
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid number.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("\n[The NPC nods and returns to their work]");
             }
         }
     }
