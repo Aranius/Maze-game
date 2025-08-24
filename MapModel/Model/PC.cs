@@ -17,12 +17,14 @@ namespace MapModel.Model
         public List<Item> Inventory { get; set; }
         public Dictionary<string, Equipment> Equipment { get; set; }
         public int Gold { get; set; }
+        public List<Quest> Quests { get; set; }
 
         public PC()
         {
             ObjectType = ObjectTypeEnum.PC;
             Inventory = new List<Item>();
             Equipment = new Dictionary<string, Equipment>();
+            Quests = new List<Quest>();
         }
 
         public string TakeItem(List<MapObject> mapa)
@@ -32,6 +34,9 @@ namespace MapModel.Model
             {
                 Inventory.Add(item);
                 mapa.Remove(item);
+                
+                // Update quest progress
+                UpdateQuestProgress(item.Name);
 
                 return $"Zobral som predmet {item.Name} do svojho inventara.";
             }
@@ -144,6 +149,50 @@ namespace MapModel.Model
 
             Equipment[equipment.EquipemntType.ToString()] = equipment;
             ApplyStatBoosts(equipment.StatBoosts);
+        }
+
+        public void AddQuest(Quest quest)
+        {
+            Quests.Add(quest);
+            quest.Start();
+        }
+
+        public void UpdateQuestProgress(string itemName)
+        {
+            foreach (var quest in Quests.Where(q => q.IsActive && !q.IsCompleted))
+            {
+                foreach (var objective in quest.Objectives)
+                {
+                    objective.UpdateProgress(this, itemName);
+                }
+                quest.CheckCompletion(this);
+            }
+        }
+
+        public string ShowQuests()
+        {
+            if (Quests.Count == 0)
+            {
+                return "No quests available.";
+            }
+
+            var questInfo = new StringBuilder();
+            questInfo.AppendLine("=== QUEST LOG ===");
+            
+            foreach (var quest in Quests)
+            {
+                questInfo.AppendLine(quest.ToString());
+                if (quest.IsActive && !quest.IsCompleted)
+                {
+                    foreach (var objective in quest.Objectives)
+                    {
+                        questInfo.AppendLine($"  {objective}");
+                    }
+                }
+                questInfo.AppendLine();
+            }
+            
+            return questInfo.ToString();
         }
     }
 }

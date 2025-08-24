@@ -161,5 +161,29 @@
     "X": 15,
     "Y": 5,
     "ObjectType": 1
+  },
+  {
+    "$id": "20",
+    "$type": "MapModel.Model.Item, MapModel",
+    "Name": "Healing Herb",
+    "Description": "A rare herb used for making healing potions.",
+    "StatBoosts": [],
+    "ItemType": 2,
+    "OnUse": null,
+    "X": 8,
+    "Y": 3,
+    "ObjectType": 4
+  },
+  {
+    "$id": "21",
+    "$type": "MapModel.Model.Item, MapModel",
+    "Name": "Healing Herb",
+    "Description": "A rare herb used for making healing potions.",
+    "StatBoosts": [],
+    "ItemType": 2,
+    "OnUse": null,
+    "X": 12,
+    "Y": 8,
+    "ObjectType": 4
   }
 ]

@@ -92,6 +92,7 @@ class Program
             Console.WriteLine("Use U to use item.");
             Console.WriteLine("Use T to talk to NPCs.");
             Console.WriteLine("Use I to open inventory.");
+            Console.WriteLine("Use Q to view quest log.");
             Console.WriteLine("F5 to save game.");
             Console.WriteLine(vysledok);
             vysledok = string.Empty;
@@ -159,6 +160,14 @@ class Program
                 case ConsoleKey.I:
                     {
                         OpenInventory();
+                    }
+                    break;
+                case ConsoleKey.Q:
+                    {
+                        Console.Clear();
+                        Console.WriteLine(pc.ShowQuests());
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
                     }
                     break;
                     case ConsoleKey.F5:
@@ -395,6 +404,34 @@ class Program
         mapa =MapFileFunction.LoadMapObjects(@$"Maps/mapa{cislo_mapy}.state");
         
         SetStartForPC(pc, mapa);
+        
+        // Initialize example quest
+        InitializeQuests(pc);
+    }
+
+    private static void InitializeQuests(PC pc)
+    {
+        // Create Clarisa's herb gathering quest
+        var herbQuest = new Quest("Herb Gathering", "Clarisa the healer needs 2 Healing Herbs to make potions for the town.");
+        herbQuest.RewardGold = 25;
+        herbQuest.RewardXP = 50;
+        
+        var gatherHerbsObjective = new QuestObjective("Collect 2 Healing Herbs", QuestObjectiveType.CollectItem)
+        {
+            TargetItemName = "Healing Herb",
+            TargetCount = 2
+        };
+        
+        herbQuest.Objectives.Add(gatherHerbsObjective);
+        
+        pc.AddQuest(herbQuest);
+        
+        Console.WriteLine("\n=== QUEST RECEIVED ===");
+        Console.WriteLine("Clarisa the healer has given you a quest!");
+        Console.WriteLine("Find 2 Healing Herbs scattered around the maze.");
+        Console.WriteLine("Use 'Q' to check your quest progress.");
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
 
     private static void ContinueGame()
