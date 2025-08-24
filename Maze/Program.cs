@@ -25,7 +25,7 @@ class Program
     {
 
         Player player = new Player();
-        player.Play(@"Music\main_theme.mp3");
+        player.Play(@"Music/main_theme.mp3");
 
         Thread newThread = new Thread(StarTwinkling);
 
@@ -90,6 +90,7 @@ class Program
             Console.WriteLine("Use O to observe.");
             Console.WriteLine("Use P to pickup item.");
             Console.WriteLine("Use U to use item.");
+            Console.WriteLine("Use T to talk to NPCs.");
             Console.WriteLine("Use I to open inventory.");
             Console.WriteLine("F5 to save game.");
             Console.WriteLine(vysledok);
@@ -150,6 +151,11 @@ class Program
 
                     }
                     break;
+                case ConsoleKey.T:
+                    {
+                        vysledok = TalkToNPC();
+                    }
+                    break;
                 case ConsoleKey.I:
                     {
                         OpenInventory();
@@ -182,8 +188,8 @@ class Program
                 {
                     koniec.FinishAchieved();
                     cislo_mapy++;
-                    maze = MapFileFunction.LoadMaze(@$"Maps\mapa{cislo_mapy}.map");
-                    mapa = MapFileFunction.LoadMapObjects(@$"Maps\mapa{cislo_mapy}.state");
+                    maze = MapFileFunction.LoadMaze(@$"Maps/mapa{cislo_mapy}.map");
+                    mapa = MapFileFunction.LoadMapObjects(@$"Maps/mapa{cislo_mapy}.state");
                     SetStartForPC(pc, mapa);
                 }
                 else
@@ -250,6 +256,40 @@ class Program
          
     }
 
+    private static string TalkToNPC()
+    {
+        // Look for NPCs at the player's current location or adjacent to the player
+        var npcAtLocation = mapa.FirstOrDefault(m => m.X == pc.X && m.Y == pc.Y && m is NPC) as NPC;
+        
+        if (npcAtLocation != null)
+        {
+            Console.Clear();
+            Console.WriteLine("=== CONVERSATION ===");
+            npcAtLocation.TalkToPlayer(pc);
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            return $"You talked to an NPC.";
+        }
+        
+        // Check for NPCs in adjacent cells
+        var adjacentNPC = mapa.FirstOrDefault(m => 
+            m is NPC && 
+            ((m.X == pc.X && Math.Abs(m.Y - pc.Y) == 1) ||
+             (m.Y == pc.Y && Math.Abs(m.X - pc.X) == 1))) as NPC;
+             
+        if (adjacentNPC != null)
+        {
+            Console.Clear();
+            Console.WriteLine("=== CONVERSATION ===");
+            adjacentNPC.TalkToPlayer(pc);
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            return $"You talked to an NPC.";
+        }
+        
+        return "There is no one to talk to here.";
+    }
+
     private static void SaveGame()
     {
         JsonSerializerSettings serializerSettings = new JsonSerializerSettings
@@ -261,7 +301,7 @@ class Program
         using Stream stream = new FileStream("save.zip", FileMode.Create);
         ZipArchive zip = new ZipArchive(stream, ZipArchiveMode.Create);
         
-        zip.CreateEntryFromFile($"Maps\\mapa{cislo_mapy}.map", $"mapa.map");
+        zip.CreateEntryFromFile($"Maps/mapa{cislo_mapy}.map", $"mapa.map");
 
         var aktualny_state = zip.CreateEntry("actual_state.state");        
         using (StreamWriter writer = new StreamWriter(aktualny_state.Open()))
@@ -347,12 +387,12 @@ class Program
         // 1. Create a new maze
 
         cislo_mapy =0;
-        maze =MapFileFunction.LoadMaze(@$"Maps\mapa{cislo_mapy}.map");
+        maze =MapFileFunction.LoadMaze(@$"Maps/mapa{cislo_mapy}.map");
 
         // 2. Create a new player
         pc =new PC();
 
-        mapa =MapFileFunction.LoadMapObjects(@$"Maps\mapa{cislo_mapy}.state");
+        mapa =MapFileFunction.LoadMapObjects(@$"Maps/mapa{cislo_mapy}.state");
         
         SetStartForPC(pc, mapa);
     }
@@ -414,7 +454,9 @@ class Program
 
     private static void LoadGame()
     {
-        throw new NotImplementedException();
+        // LoadGame is essentially the same as ContinueGame since we only have one save slot
+        // In the future, this could be extended to support multiple save files
+        ContinueGame();
     }
 
     private static void SetStartForPC(PC pc, List<MapObject> mapa)
